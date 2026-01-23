@@ -44,66 +44,64 @@ const Home = () => {
 
   return (
     <div className="space-y-20 pb-16">
-      <section className="container-grid">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-navy-800 via-navy-800/80 to-navy-700/70 p-10 shadow-2xl shadow-black/30">
-          <div className="absolute inset-0 gradient-blob opacity-60 blur-3xl" />
+      <section className="container-xl">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-10 shadow-sm">
           <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-gold-200">
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[rgb(var(--brand-soft))] px-4 py-2 text-xs font-semibold text-cyan-900">
                 Premium Indian Agro Commodities
               </div>
-              <h1 className="text-4xl font-semibold leading-tight text-sand sm:text-5xl">
+              <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
                 Premium Indian Agro Commodities for Global Markets
               </h1>
-              <p className="text-lg text-slate-200">
+              <p className="text-lg text-slate-700">
                 Turmeric • Fox Nuts (Makhana) • Basmati Rice — export-grade quality, verified
                 documentation, and on-time delivery worldwide.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/products"
-                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-gold-500 to-amber-400 px-5 py-3 font-semibold text-navy-800 shadow-lg shadow-black/20 transition hover:translate-y-[-1px] focus-ring"
+                  className="btn btn-primary"
                 >
                   Explore Products
                   <span aria-hidden>→</span>
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-5 py-3 font-semibold text-sand transition hover:border-gold-400/70 focus-ring"
+                  className="btn btn-outline"
                 >
                   Request a Quote
                 </Link>
               </div>
               <div className="grid max-w-xl grid-cols-2 gap-4 text-sm">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-slate-400">Product categories</p>
-                  <p className="text-xl font-semibold text-sand">Turmeric · Makhana · Rice</p>
+                <div className="card p-4 shadow-none">
+                  <p className="text-slate-500">Product categories</p>
+                  <p className="text-xl font-semibold text-slate-900">Turmeric · Makhana · Rice</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-slate-400">Global reach</p>
-                  <p className="text-xl font-semibold text-sand">MEA · EU · NA · SEA</p>
+                <div className="card p-4 shadow-none">
+                  <p className="text-slate-500">Global reach</p>
+                  <p className="text-xl font-semibold text-slate-900">MEA · EU · NA · SEA</p>
                 </div>
               </div>
             </div>
             <div className="relative">
-              <div className="absolute inset-6 rounded-3xl bg-gradient-to-br from-gold-500/25 via-sky-400/15 to-teal-300/15 blur-3xl" />
-              <div className="relative grid gap-4 rounded-3xl border border-white/10 bg-navy-800/70 p-6 shadow-xl shadow-black/30">
-                <p className="text-sm font-semibold text-gold-200">Trusted Export Readiness</p>
-                <ul className="space-y-3 text-slate-200">
+              <div className="relative grid gap-4 rounded-3xl border border-slate-200 bg-[rgb(var(--brand-soft))] p-6 shadow-sm">
+                <p className="text-sm font-semibold text-cyan-900">Trusted Export Readiness</p>
+                <ul className="space-y-3 text-slate-700">
                   <li>• Moisture, purity, and grading controls for every lot.</li>
                   <li>• Destination-ready documents: COA, MSDS, packing lists, invoices.</li>
                   <li>• Packaging from 100g pouches to 50kg bulk — retail or food service.</li>
                   <li>• SLA-backed dispatch and proactive milestone updates.</li>
                 </ul>
-                <div className="grid grid-cols-2 gap-3 text-xs text-slate-200">
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                <div className="grid grid-cols-2 gap-3 text-xs text-slate-700">
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
                     Compliance-forward
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
                     Private label ready
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">Food service</div>
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">Bulk supply</div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">Food service</div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">Bulk supply</div>
                 </div>
               </div>
             </div>
@@ -111,11 +109,11 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="container-grid space-y-6">
+      <section className="container-xl space-y-6">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Why Naventra Global</p>
-          <h2 className="text-3xl font-semibold text-sand">Export-grade reliability, every shipment</h2>
-          <p className="text-slate-300">
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Why Naventra Global</p>
+          <h2 className="text-3xl font-semibold text-slate-900">Export-grade reliability, every shipment</h2>
+          <p className="text-slate-600">
             A disciplined export pod that owns quality, documentation, packaging, and logistics with clear SLAs.
           </p>
         </div>
@@ -125,20 +123,20 @@ const Home = () => {
               key={card.title}
               {...fade}
               viewport={{ once: true, amount: 0.2 }}
-              className="card-surface h-full p-5"
+              className="card h-full p-5"
             >
-              <p className="text-sm font-semibold text-gold-200">{card.title}</p>
-              <p className="mt-2 text-sm text-slate-300">{card.desc}</p>
+              <p className="text-sm font-semibold text-cyan-900">{card.title}</p>
+              <p className="mt-2 text-sm text-slate-600">{card.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="container-grid space-y-6">
+      <section className="container-xl space-y-6">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Featured Products</p>
-          <h2 className="text-3xl font-semibold text-sand">Quality you can ship now</h2>
-          <p className="text-slate-300">Curated picks across basmati rice, turmeric, and makhana.</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Featured Products</p>
+          <h2 className="text-3xl font-semibold text-slate-900">Quality you can ship now</h2>
+          <p className="text-slate-600">Curated picks across basmati rice, turmeric, and makhana.</p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {featured.map((product) => (
@@ -150,7 +148,7 @@ const Home = () => {
             <Link
               key={cat.slug}
               to={`/products/${cat.slug}`}
-              className="rounded-full border border-white/15 px-4 py-2 text-sm text-sand hover:border-gold-400/70 focus-ring"
+              className="badge"
             >
               {cat.name}
             </Link>
@@ -158,11 +156,11 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="container-grid space-y-6">
+      <section className="container-xl space-y-6">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Global Markets</p>
-          <h2 className="text-3xl font-semibold text-sand">Built for compliance across regions</h2>
-          <p className="text-slate-300">Documentation, packaging, and labeling tuned to each destination.</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Global Markets</p>
+          <h2 className="text-3xl font-semibold text-slate-900">Built for compliance across regions</h2>
+          <p className="text-slate-600">Documentation, packaging, and labeling tuned to each destination.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {markets.map((market) => (
@@ -170,67 +168,66 @@ const Home = () => {
               key={market.region}
               {...fade}
               viewport={{ once: true, amount: 0.2 }}
-              className="card-surface h-full p-5"
+              className="card h-full p-5"
             >
-              <p className="text-sm font-semibold text-gold-200">{market.region}</p>
-              <p className="mt-2 text-sm text-slate-300">{market.focus}</p>
+              <p className="text-sm font-semibold text-cyan-900">{market.region}</p>
+              <p className="mt-2 text-sm text-slate-600">{market.focus}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="container-grid space-y-6">
+      <section className="container-xl space-y-6">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Partnerships</p>
-          <h2 className="text-3xl font-semibold text-sand">Fit for how you go to market</h2>
-          <p className="text-slate-300">Private label, bulk supply, and distributor-ready packs.</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Partnerships</p>
+          <h2 className="text-3xl font-semibold text-slate-900">Fit for how you go to market</h2>
+          <p className="text-slate-600">Private label, bulk supply, and distributor-ready packs.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {partnerships.map((item) => (
-            <div key={item.title} className="card-surface p-5">
-              <p className="text-sm font-semibold text-gold-200">{item.title}</p>
-              <p className="mt-2 text-sm text-slate-300">{item.desc}</p>
+            <div key={item.title} className="card p-5">
+              <p className="text-sm font-semibold text-cyan-900">{item.title}</p>
+              <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="container-grid space-y-6">
+      <section className="container-xl space-y-6">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Testimonials</p>
-          <h2 className="text-3xl font-semibold text-sand">Trusted by global partners</h2>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Testimonials</p>
+          <h2 className="text-3xl font-semibold text-slate-900">Trusted by global partners</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {testimonials.map((item) => (
-            <div key={item.name} className="card-surface h-full p-5">
-              <p className="text-lg text-sand">“{item.quote}”</p>
-              <p className="mt-3 text-sm text-gold-200">{item.name}</p>
+            <div key={item.name} className="card h-full p-5">
+              <p className="text-lg text-slate-900">“{item.quote}”</p>
+              <p className="mt-3 text-sm text-cyan-900 font-semibold">{item.name}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="container-grid">
-        <div className="relative overflow-hidden rounded-3xl border border-gold-500/30 bg-gradient-to-r from-gold-500/15 via-amber-400/10 to-sky-500/10 p-8 shadow-2xl shadow-black/30">
-          <div className="absolute inset-0 gradient-blob opacity-50 blur-2xl" />
+      <section className="container-xl">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-gold-200">Next step</p>
-              <h3 className="mt-2 text-2xl font-semibold text-sand">
+              <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Next step</p>
+              <h3 className="mt-2 text-2xl font-semibold text-slate-900">
                 Ready to ship? Let’s align on specs, packaging, and lanes.
               </h3>
-              <p className="mt-2 text-slate-200">Share your product mix and destination — we’ll reply within one business day.</p>
+              <p className="mt-2 text-slate-600">Share your product mix and destination — we’ll reply within one business day.</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-sand px-5 py-3 font-semibold text-navy-800 shadow-lg shadow-black/20 hover:translate-y-[-1px] focus-ring"
+                className="btn btn-primary"
               >
                 Request a Quote
               </Link>
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 font-semibold text-sand transition hover:border-gold-400/70 focus-ring"
+                className="btn btn-outline"
               >
                 View Products
               </Link>

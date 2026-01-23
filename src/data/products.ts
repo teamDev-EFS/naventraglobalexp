@@ -317,3 +317,11 @@ export const findProduct = (categorySlug: string | undefined, productSlug: strin
 
 export const productsByCategory = (categorySlug?: ProductCategorySlug) =>
   categorySlug ? products.filter((p) => p.categorySlug === categorySlug) : products
+
+// convenient default export for pages expecting array
+const productsDefault = products.map((p) => ({
+  ...p,
+  categoryLabel: p.categoryName,
+}))
+
+export default productsDefault
