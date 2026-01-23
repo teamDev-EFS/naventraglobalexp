@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { productsByCategory, productCategories } from '../data/products'
 import { Breadcrumbs } from '../components/Breadcrumbs'
-import { ProductCard } from '../components/ProductCard'
+import ProductCard from '../components/products/ProductCard'
 
 const ProductCategory = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>()
@@ -22,7 +22,7 @@ const ProductCategory = () => {
   }
 
   return (
-    <div className="container-grid pb-16 space-y-8">
+    <div className="container-xl pb-16 space-y-8">
       <div className="space-y-4">
         <Breadcrumbs
           items={[
@@ -32,15 +32,27 @@ const ProductCategory = () => {
           ]}
         />
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Category</p>
-          <h1 className="text-3xl font-semibold text-sand">{category.name}</h1>
-          <p className="text-slate-300">{category.description}</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Category</p>
+          <h1 className="text-3xl font-semibold text-slate-900">{category.name}</h1>
+          <p className="text-slate-600">{category.description}</p>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {list.map((product) => (
-          <ProductCard key={product.slug} product={product} />
+          <ProductCard
+            key={product.slug}
+            view="grid"
+            product={{
+              name: product.name,
+              shortDesc: product.shortDesc,
+              categoryLabel: product.categoryName,
+              categorySlug: product.categorySlug,
+              slug: product.slug,
+              heroImage: product.heroImage,
+              highlights: product.highlights,
+            }}
+          />
         ))}
       </div>
     </div>

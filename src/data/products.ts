@@ -1,3 +1,14 @@
+import basmati1121 from '../assets/1121 Basmati Rice.jpg'
+import basmati1509 from '../assets/1509 Basmati Rice.jpg'
+import pusaBasmati from '../assets/Pusa Basmati Rice.jpg'
+import traditionalBasmati from '../assets/Traditional Basmati Rice Premium.jpg'
+import kolamRice from '../assets/Kolam Rice.jpg'
+import turmericRoot from '../assets/turmeric-root-and-powder.jpg'
+import turmericPowder from '../assets/turmeric.jpg'
+import makhanaRaw from '../assets/makhana.jpg'
+import makhanaRoasted from '../assets/Makhana roasted.webp'
+import parboiledRice from '../assets/Parboiled Rice.jpg'
+import thaiRice from '../assets/thai rice.webp'
 export type ProductCategorySlug = 'rice-portfolio' | 'turmeric' | 'makhana'
 
 export type Product = {
@@ -42,12 +53,8 @@ export const products: Product[] = [
     categoryName: 'Rice Portfolio',
     slug: '1121-basmati-rice',
     name: '1121 Basmati Rice',
-    heroImage:
-      'https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=900&q=70',
-    gallery: [
-      'https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=70',
-      'https://images.unsplash.com/photo-1504309092620-4b7a4caef51b?auto=format&fit=crop&w=1200&q=70',
-    ],
+    heroImage: basmati1121,
+    gallery: [basmati1121, parboiledRice, thaiRice],
     shortDesc: 'Extra long grain premium basmati with aroma and consistent length.',
     longDesc:
       '1121 Basmati Rice known for its extra-long grains (8.5mm+), exquisite aroma, and distinct flavor. Available in Steam, Sella, and Raw varieties with tight moisture control.',
@@ -70,11 +77,8 @@ export const products: Product[] = [
     categoryName: 'Rice Portfolio',
     slug: '1509-basmati-rice',
     name: '1509 Basmati Rice',
-    heroImage:
-      'https://images.unsplash.com/photo-1448043552756-e747b7a2b2b8?auto=format&fit=crop&w=900&q=70',
-    gallery: [
-      'https://images.unsplash.com/photo-1481391032119-d89fee407e44?auto=format&fit=crop&w=1200&q=70',
-    ],
+    heroImage: basmati1509,
+    gallery: [basmati1509, parboiledRice],
     shortDesc: 'Long-grain basmati known for yield and consistency in large-scale kitchens.',
     longDesc:
       '1509 basmati offers reliable length and cooking yield, ideal for QSR, HORECA, and bulk programs needing predictable performance.',
@@ -97,11 +101,8 @@ export const products: Product[] = [
     categoryName: 'Rice Portfolio',
     slug: 'pusa-basmati',
     name: 'Pusa Basmati',
-    heroImage:
-      'https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&w=900&q=70',
-    gallery: [
-      'https://images.unsplash.com/photo-1504309092620-4b7a4caef51b?auto=format&fit=crop&w=1200&q=70',
-    ],
+    heroImage: pusaBasmati,
+    gallery: [pusaBasmati, parboiledRice],
     shortDesc: 'Balanced aroma and grain length for versatile retail packs.',
     longDesc:
       'Pusa basmati balances aroma, texture, and price — ideal for mainstream retail and private label programs needing dependable quality.',
@@ -124,11 +125,8 @@ export const products: Product[] = [
     categoryName: 'Rice Portfolio',
     slug: 'traditional-basmati',
     name: 'Traditional Basmati',
-    heroImage:
-      'https://images.unsplash.com/photo-1514516430032-7f40ed986722?auto=format&fit=crop&w=900&q=70',
-    gallery: [
-      'https://images.unsplash.com/photo-1504309092620-4b7a4caef51b?auto=format&fit=crop&w=1200&q=70',
-    ],
+    heroImage: traditionalBasmati,
+    gallery: [traditionalBasmati, parboiledRice],
     shortDesc: 'Classic basmati profile for heritage and specialty programs.',
     longDesc:
       'Traditional basmati with authentic aroma and slender grains, suited for heritage brands and premium hospitality menus.',
@@ -147,15 +145,59 @@ export const products: Product[] = [
     keywords: ['traditional basmati', 'heritage rice', 'premium aged rice'],
   },
   {
+    categorySlug: 'rice-portfolio',
+    categoryName: 'Rice Portfolio',
+    slug: 'kolam-rice',
+    name: 'Kolam Rice',
+    heroImage: kolamRice,
+    gallery: [kolamRice, parboiledRice],
+    shortDesc: 'Everyday table rice with soft texture, ideal for retail packs.',
+    longDesc:
+      'Kolam rice with consistent grain and cooking behavior, suited for mainstream retail and private label SKUs needing value and reliability.',
+    highlights: ['Soft texture', 'Reliable cooking', 'Value aligned'],
+    specs: [
+      { label: 'Grain length', value: '5.0–5.5mm' },
+      { label: 'Moisture', value: '<13%' },
+      { label: 'Broken', value: '<3%' },
+      { label: 'Purity', value: '92–95%' },
+      { label: 'Crop', value: 'New crop' },
+    ],
+    varieties: ['Steam'],
+    packaging: ['1kg', '5kg', '10kg', '25kg'],
+    attributes: ['Retail friendly', 'Value-optimized'],
+    tags: ['Kolam', 'Table rice'],
+    keywords: ['kolam rice', 'retail rice', 'value rice'],
+  },
+  {
+    categorySlug: 'rice-portfolio',
+    categoryName: 'Rice Portfolio',
+    slug: 'parboiled-rice',
+    name: 'Parboiled Rice',
+    heroImage: parboiledRice,
+    gallery: [parboiledRice, basmati1509],
+    shortDesc: 'Parboiled grains for bulk and food service programs.',
+    longDesc:
+      'Parboiled rice processed for better yield and holding quality, ideal for QSR, catering, and institutional buyers.',
+    highlights: ['Stable hold', 'Great yield', 'Food-service ready'],
+    specs: [
+      { label: 'Moisture', value: '12–13%' },
+      { label: 'Broken', value: '<3%' },
+      { label: 'Purity', value: '92–95%' },
+      { label: 'Crop', value: 'New crop' },
+    ],
+    varieties: ['Parboiled'],
+    packaging: ['5kg', '10kg', '25kg', '40kg', '50kg'],
+    attributes: ['Bulk ready', 'Export-ready'],
+    tags: ['Parboiled', 'Food service'],
+    keywords: ['parboiled rice', 'bulk rice', 'food service rice'],
+  },
+  {
     categorySlug: 'turmeric',
     categoryName: 'Turmeric',
     slug: 'turmeric-finger',
     name: 'Turmeric Finger',
-    heroImage:
-      'https://images.unsplash.com/photo-1506617420156-8e4536971650?auto=format&fit=crop&w=900&q=70',
-    gallery: [
-      'https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=1200&q=70',
-    ],
+    heroImage: turmericRoot,
+    gallery: [turmericRoot, turmericPowder],
     shortDesc: 'High-curcumin whole turmeric fingers with bright color.',
     longDesc:
       'Sourced from trusted growers with strict sorting and drying controls to retain curcumin and vibrant color.',
@@ -178,11 +220,8 @@ export const products: Product[] = [
     categoryName: 'Turmeric',
     slug: 'turmeric-powder',
     name: 'Turmeric Powder',
-    heroImage:
-      'https://images.unsplash.com/photo-1506617420156-8e4536971650?auto=format&fit=crop&w=900&q=70&sat=-20',
-    gallery: [
-      'https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=1200&q=70&sat=-20',
-    ],
+    heroImage: turmericPowder,
+    gallery: [turmericPowder, turmericRoot],
     shortDesc: 'Fine mesh turmeric powder with consistent color and flavor.',
     longDesc:
       'Processed in hygienic facilities with mesh control for smooth texture. Ideal for retail packs and spice blends.',
@@ -205,11 +244,8 @@ export const products: Product[] = [
     categoryName: 'Turmeric',
     slug: 'alleppey-turmeric',
     name: 'Alleppey Turmeric (Premium)',
-    heroImage:
-      'https://images.unsplash.com/photo-1506617420156-8e4536971650?auto=format&fit=crop&w=900&q=70&sat=-50',
-    gallery: [
-      'https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=1200&q=70&sat=-50',
-    ],
+    heroImage: turmericRoot,
+    gallery: [turmericRoot],
     shortDesc: 'Premium Alleppey turmeric with rich color and aroma.',
     longDesc:
       'Select Alleppey turmeric known for deep color and higher curcumin, ideal for premium retail and specialty blends.',
@@ -232,11 +268,8 @@ export const products: Product[] = [
     categoryName: 'Fox Nuts / Makhana',
     slug: 'premium-makhana-4-suta',
     name: 'Premium Makhana (4 Suta)',
-    heroImage:
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=70',
-    gallery: [
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=70',
-    ],
+    heroImage: makhanaRaw,
+    gallery: [makhanaRaw],
     shortDesc: 'Large-size makhana for premium retail packs and gifting.',
     longDesc:
       'Handpicked large fox nuts with uniform size, ideal for premium snacking SKUs and flavored roasts.',
@@ -259,11 +292,8 @@ export const products: Product[] = [
     categoryName: 'Fox Nuts / Makhana',
     slug: 'standard-makhana-5-suta',
     name: 'Standard Makhana (5 Suta)',
-    heroImage:
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=70&sat=-20',
-    gallery: [
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=70&sat=-20',
-    ],
+    heroImage: makhanaRaw,
+    gallery: [makhanaRaw],
     shortDesc: 'Balanced size makhana for everyday retail and bulk formats.',
     longDesc:
       'Consistent 5-suta sizing suitable for flavored roasting lines, retail pouches, and bulk food service packs.',
@@ -286,11 +316,8 @@ export const products: Product[] = [
     categoryName: 'Fox Nuts / Makhana',
     slug: 'roasted-makhana',
     name: 'Roasted Makhana',
-    heroImage:
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=70&sat=-40',
-    gallery: [
-      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=70&sat=-40',
-    ],
+    heroImage: makhanaRoasted,
+    gallery: [makhanaRoasted, makhanaRaw],
     shortDesc: 'Ready-to-season roasted fox nuts for fast GTM.',
     longDesc:
       'Lightly roasted makhana base with low moisture for longer shelf life, ready for flavoring lines and private label packs.',

@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import ProductCard from '../components/products/ProductCard'
 import productsData from '../data/products'
@@ -28,13 +28,7 @@ export default function ProductsPage() {
   const variety = getAll(params, 'variety')
   const pack = getAll(params, 'pack')
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    const t = setTimeout(() => setLoading(false), 300)
-    return () => clearTimeout(t)
-  }, [debouncedQ, sort, view, category, variety, pack])
+  const loading = false
 
   const categories = useMemo(() => {
     const map = new Map<string, string>()

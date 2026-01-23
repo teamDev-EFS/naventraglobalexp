@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { products, productCategories } from '../data/products'
-import { ProductCard } from '../components/ProductCard'
+import ProductCard from '../components/products/ProductCard'
 
 const fade = { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 } }
 
@@ -140,7 +140,19 @@ const Home = () => {
         </div>
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {featured.map((product) => (
-            <ProductCard key={product.slug} product={product} />
+            <ProductCard
+              key={product.slug}
+              product={{
+                name: product.name,
+                shortDesc: product.shortDesc,
+                categoryLabel: product.categoryName,
+                categorySlug: product.categorySlug,
+                slug: product.slug,
+                heroImage: product.heroImage,
+                highlights: product.highlights,
+              }}
+              view="grid"
+            />
           ))}
         </div>
         <div className="flex flex-wrap gap-3">
