@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import CertificateModal from '../components/CertificateModal'
+import CertificateCard from '../components/CertificateCard'
 
 type Cert = {
   id: string
   title: string
   desc: string
   file: string
+  preview: string
 }
 
 const CERTS: Cert[] = [
@@ -14,101 +17,89 @@ const CERTS: Cert[] = [
     title: 'Udyam Registration Certificate',
     desc: 'Official MSME registration verification document.',
     file: '/certificates/udyam-certificate.pdf',
+    preview: '/certificates/udyam-preview.png',
   },
   {
     id: 'est',
     title: 'Establishment Certification',
     desc: 'Establishment document supporting export readiness.',
     file: '/certificates/establishment-certificate.pdf',
+    preview: '/certificates/establishment-preview.png',
   },
 ]
 
-function isPdf(path: string) {
-  return path.toLowerCase().endsWith('.pdf')
-}
-
 export default function CertificatesPage() {
   const [open, setOpen] = useState<Cert | null>(null)
+  const [scrollLocked, setScrollLocked] = useState(false)
+
+  useEffect(() => {
+    if (open && !scrollLocked) {
+      const prev = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      setScrollLocked(true)
+      return () => {
+        document.body.style.overflow = prev
+        setScrollLocked(false)
+      }
+    }
+    if (!open && scrollLocked) {
+      document.body.style.overflow = ''
+      setScrollLocked(false)
+    }
+  }, [open, scrollLocked])
+
+  const cards = useMemo(() => CERTS, [])
 
   return (
-    <div className="container-xl py-10">
-      <p className="text-xs font-semibold text-cyan-800">
-        <Link className="text-slate-600 hover:text-slate-900" to="/">
-          Home
-        </Link>{' '}
-        <span className="text-slate-400">/</span> Certificates
-      </p>
+    <div className="container-xl py-12">
+      {/* Hero */}
+      <div className="space-y-3">
+        <p className="text-xs font-semibold text-[rgb(var(--brand))]">
+          <Link className="text-slate-700 hover:text-slate-900" to="/">
+            Home
+          </Link>{' '}
+          <span className="text-slate-500">/</span> Certificates
+        </p>
+        <h1 className="text-3xl font-semibold text-slate-900">Compliance & Certificates</h1>
+        <p className="text-slate-700">
+          Verified documentation for global partners. Download or view full screen.
+        </p>
+      </div>
 
-      <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-900">Legitimacy you can verify</h1>
-      <p className="mt-2 text-slate-600">Certificates shown for verification. For official copies, contact us.</p>
-
-      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {CERTS.map((c) => (
-          <div key={c.id} className="card overflow-hidden">
-            <div className="p-5">
-              <h3 className="text-base font-semibold text-slate-900">{c.title}</h3>
-              <p className="mt-1 text-sm text-slate-600">{c.desc}</p>
-            </div>
-
-            <div className="px-5 pb-5">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 overflow-hidden aspect-[16/10]">
-                {isPdf(c.file) ? (
-                  <iframe
-                    title={c.title}
-                    src={`${c.file}#toolbar=0&navpanes=0&scrollbar=0`}
-                    className="h-full w-full"
-                  />
-                ) : (
-                  <img src={c.file} alt={c.title} className="h-full w-full object-cover" />
-                )}
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                <button className="btn btn-primary" onClick={() => setOpen(c)}>
-                  View Fullscreen
-                </button>
-                <a className="btn btn-outline" href={c.file} download>
-                  Download
-                </a>
-              </div>
-
-              <p className="mt-3 text-xs text-slate-500">
-                Replace with official certificate files under <b>/public/certificates</b>.
-              </p>
-            </div>
+      {/* Trust bar */}
+      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {['Verified Documents', 'Export-ready', 'Transparent Compliance'].map((label) => (
+          <div
+            key={label}
+            className="rounded-2xl border border-[rgb(var(--border))] bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm"
+          >
+            {label}
           </div>
         ))}
       </div>
 
-      {open && (
-        <div className="fixed inset-0 z-50 bg-black/60 p-4" onClick={() => setOpen(null)}>
-          <div
-            className="mx-auto h-full max-w-5xl rounded-2xl bg-white p-3"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between px-2 py-2">
-              <div>
-                <h4 className="text-sm font-semibold text-slate-900">{open.title}</h4>
-                <p className="text-xs text-slate-500">{open.desc}</p>
-              </div>
-              <button className="btn btn-outline" onClick={() => setOpen(null)}>
-                Close
-              </button>
-            </div>
+      {/* Grid */}
+      <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {cards.map((c) => (
+          <CertificateCard
+            key={c.id}
+            title={c.title}
+            desc={c.desc}
+            preview={c.preview}
+            pdf={c.file}
+            onView={() => setOpen(c)}
+          />
+        ))}
+      </div>
 
-            <div className="h-[calc(100%-56px)] overflow-hidden rounded-xl border border-slate-200">
-              {isPdf(open.file) ? (
-                <iframe
-                  title={open.title}
-                  src={`${open.file}#toolbar=1&navpanes=1&scrollbar=1`}
-                  className="h-full w-full"
-                />
-              ) : (
-                <img src={open.file} alt={open.title} className="h-full w-full object-contain bg-slate-50" />
-              )}
-            </div>
-          </div>
-        </div>
+      {/* Modal */}
+      {open && (
+        <CertificateModal
+          title={open.title}
+          desc={open.desc}
+          pdf={open.file}
+          onClose={() => setOpen(null)}
+        />
       )}
     </div>
   )

@@ -32,9 +32,9 @@ const ProductCategory = () => {
           ]}
         />
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Category</p>
+          <p className="text-sm font-semibold uppercase tracking-wide text-[rgb(var(--brand))]">Category</p>
           <h1 className="text-3xl font-semibold text-slate-900">{category.name}</h1>
-          <p className="text-slate-600">{category.description}</p>
+          <p className="text-slate-700">{category.description}</p>
         </div>
       </div>
 

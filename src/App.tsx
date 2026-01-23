@@ -8,7 +8,6 @@ const ProductCategory = lazy(() => import('./pages/ProductCategory'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const About = lazy(() => import('./pages/About'))
 const GlobalMarkets = lazy(() => import('./pages/GlobalMarkets'))
-const Partnerships = lazy(() => import('./pages/Partnerships'))
 const Team = lazy(() => import('./pages/Team'))
 const Certificates = lazy(() => import('./pages/Certificates'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -31,7 +30,7 @@ const App = () => (
         </Route>
         <Route path="about" element={<About />} />
         <Route path="global-markets" element={<GlobalMarkets />} />
-        <Route path="partnerships" element={<Partnerships />} />
+        <Route path="partnerships" element={<Navigate to="/" replace />} />
         <Route path="team" element={<Team />} />
         <Route path="certificates" element={<Certificates />} />
         <Route path="contact" element={<Contact />} />

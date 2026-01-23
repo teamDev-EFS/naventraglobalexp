@@ -3,6 +3,9 @@ import { motion } from 'framer-motion'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { products, productCategories } from '../data/products'
 import ProductCard from '../components/products/ProductCard'
+import ExportBackdrop from '../components/ExportBackdrop'
+import logo from '../assets/NaventraGlobal-logo.png'
+import bgImage from '../assets/naventraglobal background.png'
 
 const fade = { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 } }
 
@@ -45,48 +48,57 @@ const Home = () => {
   return (
     <div className="space-y-20 pb-16">
       <section className="container-xl">
-        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-10 shadow-sm">
+        <div
+          className="relative overflow-hidden rounded-3xl border border-[rgb(var(--border))] bg-white p-10 shadow-sm"
+          style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        >
+          <ExportBackdrop />
+          <div className="absolute inset-0 bg-white/88 pointer-events-none" />
           <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[rgb(var(--brand-soft))] px-4 py-2 text-xs font-semibold text-cyan-900">
+            <div className="space-y-6 rounded-2xl bg-white/92 p-6 shadow-md backdrop-blur">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[rgb(var(--brand))] bg-[rgb(var(--brand-soft))] px-4 py-2 text-xs font-semibold text-[rgb(var(--brand))]">
                 Premium Indian Agro Commodities
               </div>
               <h1 className="text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl">
                 Premium Indian Agro Commodities for Global Markets
               </h1>
-              <p className="text-lg text-slate-700">
+              <p className="text-lg text-slate-800">
                 Turmeric • Fox Nuts (Makhana) • Basmati Rice — export-grade quality, verified
                 documentation, and on-time delivery worldwide.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link
-                  to="/products"
-                  className="btn btn-primary"
-                >
+                <Link to="/products" className="btn btn-primary">
                   Explore Products
                   <span aria-hidden>→</span>
                 </Link>
-                <Link
-                  to="/contact"
-                  className="btn btn-outline"
-                >
+                <Link to="/contact" className="btn btn-outline">
                   Request a Quote
+                </Link>
+                <Link to="/certificates" className="btn btn-outline">
+                  View Certifications
                 </Link>
               </div>
               <div className="grid max-w-xl grid-cols-2 gap-4 text-sm">
                 <div className="card p-4 shadow-none">
-                  <p className="text-slate-500">Product categories</p>
+                  <p className="text-slate-600">Product categories</p>
                   <p className="text-xl font-semibold text-slate-900">Turmeric · Makhana · Rice</p>
                 </div>
                 <div className="card p-4 shadow-none">
-                  <p className="text-slate-500">Global reach</p>
+                  <p className="text-slate-600">Global reach</p>
                   <p className="text-xl font-semibold text-slate-900">MEA · EU · NA · SEA</p>
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <div className="relative grid gap-4 rounded-3xl border border-slate-200 bg-[rgb(var(--brand-soft))] p-6 shadow-sm">
-                <p className="text-sm font-semibold text-cyan-900">Trusted Export Readiness</p>
+            <div className="relative flex items-center justify-center">
+              <div className="relative grid gap-4 rounded-3xl border border-[rgb(var(--border))] bg-[rgb(var(--brand-soft))] p-6 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <img src={logo} alt="Naventra Global" className="h-12 w-12 rounded-xl object-contain border border-[rgb(var(--border))]" />
+                  <div>
+                    <p className="text-sm font-semibold text-[rgb(var(--brand))]">Naventra Global</p>
+                    <p className="text-xs text-slate-700">Premium Exports</p>
+                  </div>
+                </div>
+                <p className="text-sm font-semibold text-[rgb(var(--brand))]">Trusted Export Readiness</p>
                 <ul className="space-y-3 text-slate-700">
                   <li>• Moisture, purity, and grading controls for every lot.</li>
                   <li>• Destination-ready documents: COA, MSDS, packing lists, invoices.</li>
@@ -94,14 +106,14 @@ const Home = () => {
                   <li>• SLA-backed dispatch and proactive milestone updates.</li>
                 </ul>
                 <div className="grid grid-cols-2 gap-3 text-xs text-slate-700">
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                  <div className="rounded-xl border border-[rgb(var(--border))] bg-white px-3 py-2">
                     Compliance-forward
                   </div>
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                  <div className="rounded-xl border border-[rgb(var(--border))] bg-white px-3 py-2">
                     Private label ready
                   </div>
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">Food service</div>
-                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">Bulk supply</div>
+                  <div className="rounded-xl border border-[rgb(var(--border))] bg-white px-3 py-2">Food service</div>
+                  <div className="rounded-xl border border-[rgb(var(--border))] bg-white px-3 py-2">Bulk supply</div>
                 </div>
               </div>
             </div>
@@ -221,10 +233,10 @@ const Home = () => {
       </section>
 
       <section className="container-xl">
-        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="relative overflow-hidden rounded-3xl border border-[rgb(var(--border))] bg-white p-8 shadow-sm">
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-cyan-900">Next step</p>
+              <p className="text-sm font-semibold uppercase tracking-wide text-[rgb(var(--brand))]">Next step</p>
               <h3 className="mt-2 text-2xl font-semibold text-slate-900">
                 Ready to ship? Let’s align on specs, packaging, and lanes.
               </h3>
@@ -242,6 +254,9 @@ const Home = () => {
                 className="btn btn-outline"
               >
                 View Products
+              </Link>
+              <Link to="/global-markets" className="btn btn-outline">
+                View Key Markets
               </Link>
             </div>
           </div>

@@ -4,7 +4,6 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/products', label: 'Products' },
   { to: '/global-markets', label: 'Global Markets' },
-  { to: '/partnerships', label: 'Partnerships' },
   { to: '/team', label: 'Team' },
   { to: '/certificates', label: 'Certificates' },
   { to: '/contact', label: 'Contact' },
@@ -15,7 +14,7 @@ export const Footer = () => (
     <div className="container-xl grid gap-8 py-10 md:grid-cols-[1.2fr,1fr,1fr]">
       <div>
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-cyan-800 to-cyan-600 text-white font-semibold">
+          <div className="grid h-10 w-10 place-items-center rounded-xl bg-[rgb(var(--brand))] text-white font-semibold">
             NG
           </div>
           <div>

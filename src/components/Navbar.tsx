@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { NavLink, Link } from 'react-router-dom'
+import logo from '../assets/NaventraGlobal-logo.png'
 
 const navItems = [
   { to: '/', label: 'Home' },
   { to: '/products', label: 'Products' },
   { to: '/about', label: 'About' },
   { to: '/global-markets', label: 'Global Markets' },
-  { to: '/partnerships', label: 'Partnerships' },
   { to: '/team', label: 'Team' },
   { to: '/certificates', label: 'Certificates' },
   { to: '/contact', label: 'Contact' },
@@ -20,16 +20,18 @@ export const Navbar = () => {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-md">
       <div className="container-xl flex items-center justify-between py-4">
         <Link to="/" className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-cyan-800 to-cyan-600 text-white shadow-md">
-            <span className="text-sm font-bold">NG</span>
-          </div>
+          <img
+            src={logo}
+            alt="Naventra Global"
+            className="h-11 w-11 rounded-xl border border-[rgb(var(--border))] object-contain"
+          />
           <div>
             <p className="text-sm font-semibold text-slate-900">Naventra Global</p>
             <p className="text-xs text-slate-600">Premium Exports</p>
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 lg:flex">
+        <nav className="hidden items-center gap-6 text-sm font-medium text-[rgb(var(--muted))] lg:flex">
           {navItems.map((item) => (
             <NavLink
               key={item.to}

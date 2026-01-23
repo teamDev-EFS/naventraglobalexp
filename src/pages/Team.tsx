@@ -2,11 +2,8 @@ import { Breadcrumbs } from '../components/Breadcrumbs'
 import { usePageMeta } from '../hooks/usePageMeta'
 
 const members = [
-  { name: 'Aarav Menon', role: 'Founder & Director', focus: 'Strategy, key accounts, compliance oversight.' },
-  { name: 'Neha Kapoor', role: 'Export Manager', focus: 'Documentation, customs coordination, dispatch governance.' },
-  { name: 'Rahul Iyer', role: 'Quality Lead', focus: 'Lot-wise QC, grading, moisture, and packaging integrity.' },
-  { name: 'Sara Thomas', role: 'Logistics Coordinator', focus: 'Lane planning, partner orchestration, milestone updates.' },
-  { name: 'Vikram Rao', role: 'Sales Lead', focus: 'Private label and distributor programs across regions.' },
+  { name: 'Ansh Joshi', role: 'Director & Proprietor', focus: 'Leads sourcing, partner onboarding, and compliance across lanes.' },
+
 ]
 
 const Team = () => {
@@ -17,24 +14,24 @@ const Team = () => {
   })
 
   return (
-    <div className="container-grid pb-16 space-y-8">
+    <div className="container-xl pb-16 space-y-8">
       <div className="space-y-3">
         <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Team' }]} />
-        <p className="text-sm font-semibold uppercase tracking-wide text-gold-300">Team</p>
-        <h1 className="text-3xl font-semibold text-sand">Operators behind every shipment</h1>
-        <p className="text-slate-300 max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-wide text-[rgb(var(--brand))]">Team</p>
+        <h1 className="text-3xl font-semibold text-slate-900">Operators behind every shipment</h1>
+        <p className="text-slate-700 max-w-3xl">
           A focused pod of operators covering sourcing, QC, documentation, and logistics to deliver export-grade commodities.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {members.map((member) => (
-          <div key={member.name} className="card-surface h-full p-5">
-            <div className="flex items-center justify-between">
-              <div className="rounded-full bg-gold-500/20 px-3 py-1 text-xs font-semibold text-gold-200">{member.role}</div>
+          <div key={member.name} className="card h-full p-5 space-y-2">
+            <div className="inline-flex rounded-full border border-[rgb(var(--brand))] bg-[rgb(var(--brand-soft))] px-3 py-1 text-xs font-semibold text-[rgb(var(--brand))]">
+              {member.role}
             </div>
-            <p className="mt-3 text-lg font-semibold text-sand">{member.name}</p>
-            <p className="mt-1 text-sm text-slate-300">{member.focus}</p>
+            <p className="text-lg font-semibold text-slate-900">{member.name}</p>
+            <p className="text-sm text-slate-700">{member.focus}</p>
           </div>
         ))}
       </div>

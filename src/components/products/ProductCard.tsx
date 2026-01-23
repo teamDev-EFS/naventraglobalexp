@@ -18,7 +18,11 @@ export default function ProductCard({ view, product }: Props) {
   const href = `/products/${product.categorySlug}/${product.slug}`
 
   return (
-    <div className={`card overflow-hidden ${view === 'list' ? 'flex gap-4 p-4' : ''}`}>
+    <div
+      className={`card overflow-hidden ${
+        view === 'list' ? 'flex gap-4 p-4' : 'flex h-full flex-col'
+      }`}
+    >
       {/* image */}
       <div className={view === 'list' ? 'w-44 shrink-0' : ''}>
         <div
@@ -40,7 +44,7 @@ export default function ProductCard({ view, product }: Props) {
       </div>
 
       {/* content */}
-      <div className={view === 'list' ? 'flex-1' : 'p-4'}>
+      <div className={view === 'list' ? 'flex-1' : 'flex flex-1 flex-col p-4'}>
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs font-semibold text-cyan-800">{product.categoryLabel}</p>
@@ -57,11 +61,16 @@ export default function ProductCard({ view, product }: Props) {
           ))}
         </div>
 
-        <div className="mt-4 flex items-center justify-between">
-          <Link to={href} className="btn btn-primary">
+        <div
+          className={`mt-4 flex items-center gap-2 ${view === 'list' ? 'justify-between' : 'flex-col'}`}
+        >
+          <Link
+            to={href}
+            className={`btn btn-primary w-full justify-center ${view === 'list' ? 'max-w-[160px]' : 'max-w-none'}`}
+          >
             View Details
           </Link>
-          <span className="text-xs text-slate-500">Export-ready</span>
+          <span className="text-xs text-slate-500">{'Export-ready'}</span>
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import ProductCard from '../components/products/ProductCard'
+import { ActiveFilterChips } from '../components/products/ActiveFilterChips'
+import { FilterSidebar } from '../components/products/FilterSidebar'
+import { FilterDrawer } from '../components/products/FilterDrawer'
+import { ProductGrid } from '../components/products/ProductGrid'
 import productsData from '../data/products'
 import { useDebounce } from '../hooks/useDebounce'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -8,8 +11,6 @@ import { usePageMeta } from '../hooks/usePageMeta'
 const SORTS = ['recommended', 'az', 'za'] as const
 
 const getAll = (params: URLSearchParams, key: string) => params.getAll(key)
-
-const toOptions = (list: string[]) => list.map((item) => ({ value: item, label: item }))
 
 export default function ProductsPage() {
   usePageMeta({
@@ -28,12 +29,11 @@ export default function ProductsPage() {
   const variety = getAll(params, 'variety')
   const pack = getAll(params, 'pack')
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const loading = false
 
   const categories = useMemo(() => {
     const map = new Map<string, string>()
     productsData.forEach((p: any) => map.set(p.categorySlug, p.categoryLabel))
-    return [...map.entries()].map(([slug, label]) => ({ slug, label }))
+    return [...map.entries()].map(([value, label]) => ({ value, label }))
   }, [])
 
   const varieties = useMemo(
@@ -89,36 +89,51 @@ export default function ProductsPage() {
     setParams(p, { replace: true })
   }
 
-  const selectedChips = [
+  const quickFilter = (key: string) => toggleMulti('cat', key)
+  const quickAttr = (token: string) => {
+    const current = new Set(q.split(' ').filter(Boolean))
+    if (current.has(token.toLowerCase())) {
+      current.delete(token.toLowerCase())
+    } else {
+      current.add(token.toLowerCase())
+    }
+    const next = [...current].join(' ')
+    const p = new URLSearchParams(params)
+    if (next) p.set('q', next)
+    else p.delete('q')
+    setParams(p, { replace: true })
+  }
+
+  const activeCount = category.length + variety.length + pack.length
+
+  const chips = [
     ...category.map((c) => ({
-      label: categories.find((cat) => cat.slug === c)?.label ?? c,
-      key: 'cat',
-      value: c,
+      label: categories.find((cat) => cat.value === c)?.label ?? c,
+      onRemove: () => toggleMulti('cat', c),
     })),
-    ...variety.map((v) => ({ label: v, key: 'variety', value: v })),
-    ...pack.map((v) => ({ label: v, key: 'pack', value: v })),
+    ...variety.map((v) => ({ label: v, onRemove: () => toggleMulti('variety', v) })),
+    ...pack.map((v) => ({ label: v, onRemove: () => toggleMulti('pack', v) })),
   ]
 
   return (
     <div className="container-xl py-10">
-      {/* Header */}
       <div className="flex flex-col gap-3">
-        <p className="text-xs font-semibold text-cyan-800">
-          <Link className="text-slate-600 hover:text-slate-900" to="/">
+        <p className="text-xs font-semibold text-[rgb(var(--brand))]">
+          <Link className="text-slate-700 hover:text-slate-900" to="/">
             Home
           </Link>{' '}
-          <span className="text-slate-400">/</span> Products
+          <span className="text-slate-500">/</span> Products
         </p>
 
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
           Agro commodities for global markets
         </h1>
-        <p className="text-slate-600">
+        <p className="text-slate-700">
           Search and compare premium basmati rice, turmeric, and makhana. Shareable filters via URL.
         </p>
       </div>
 
-      {/* Controls */}
+      {/* Top controls */}
       <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <input
@@ -138,98 +153,80 @@ export default function ProductsPage() {
             <option value="za">Z–A</option>
           </select>
 
-          <button onClick={() => setMobileFiltersOpen(true)} className="btn btn-outline md:hidden">
-            Filters
-          </button>
-
-          <button onClick={clearAll} className="btn btn-outline">
-            Clear all
-          </button>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-slate-600">
-            Showing <b>{filtered.length}</b> of <b>{productsData.length}</b>
-          </span>
-
-          <div className="ml-2 inline-flex overflow-hidden rounded-xl border border-slate-300 bg-white">
-            <button
-              className={`px-3 py-2 text-sm font-semibold ${view === 'grid' ? 'bg-slate-100' : ''}`}
-              onClick={() => setParam('view', 'grid')}
-            >
-              Grid
-            </button>
-            <button
-              className={`px-3 py-2 text-sm font-semibold ${view === 'list' ? 'bg-slate-100' : ''}`}
-              onClick={() => setParam('view', 'list')}
-            >
-              List
+          <div className="ml-auto flex items-center gap-2 md:ml-0">
+            <span className="text-sm text-slate-600">
+              Showing <b>{filtered.length}</b> of <b>{productsData.length}</b>
+            </span>
+            <div className="inline-flex overflow-hidden rounded-xl border border-[rgb(var(--border))] bg-white">
+              <button
+                className={`px-3 py-2 text-sm font-semibold ${view === 'grid' ? 'bg-[rgb(var(--brand-soft))] text-[rgb(var(--brand))]' : ''}`}
+                onClick={() => setParam('view', 'grid')}
+              >
+                Grid
+              </button>
+              <button
+                className={`px-3 py-2 text-sm font-semibold ${view === 'list' ? 'bg-[rgb(var(--brand-soft))] text-[rgb(var(--brand))]' : ''}`}
+                onClick={() => setParam('view', 'list')}
+              >
+                List
+              </button>
+            </div>
+            <button onClick={() => setMobileFiltersOpen(true)} className="btn btn-outline md:hidden">
+              Filters {activeCount > 0 ? `(${activeCount})` : ''}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Filter chips */}
-      {selectedChips.length > 0 && (
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          {selectedChips.map((chip) => (
+      {/* Quick filters */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {categories.map((c) => {
+          const active = category.includes(c.value)
+          return (
             <button
-              key={`${chip.key}-${chip.value}`}
-              onClick={() => toggleMulti(chip.key, chip.value)}
-              className="badge"
+              key={c.value}
+              onClick={() => quickFilter(c.value)}
+              className={`rounded-full border px-3 py-1 text-sm ${
+                active
+                  ? 'border-[rgb(var(--brand))] bg-[rgb(var(--brand-soft))] text-[rgb(var(--brand))]'
+                  : 'border-[rgb(var(--border))] text-slate-700'
+              }`}
             >
-              {chip.label} ✕
+              {c.label}
             </button>
-          ))}
-          <button onClick={clearAll} className="text-sm font-semibold text-cyan-800">
-            Clear all
-          </button>
-        </div>
-      )}
+          )
+        })}
+        <button className="badge" onClick={() => quickAttr('export-ready')}>
+          Export-ready
+        </button>
+        <button className="badge" onClick={() => quickAttr('premium')}>
+          Premium
+        </button>
+      </div>
+
+      {/* Active chips */}
+      <div className="mt-3">
+        <ActiveFilterChips chips={chips} onClear={clearAll} />
+      </div>
 
       {/* Main layout */}
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-[280px_1fr]">
-        {/* Sidebar filters (desktop) */}
-        <aside className="card hidden h-fit p-4 md:block md:sticky md:top-24">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-900">Filters</h3>
-            <button className="text-xs text-cyan-800" onClick={clearAll}>
-              Clear
-            </button>
-          </div>
-          <p className="help mt-1">Select categories, varieties, and packaging.</p>
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-[300px,1fr]">
+        <FilterSidebar
+          categories={categories}
+          varieties={varieties}
+          packaging={packaging}
+          selectedCategories={category}
+          selectedVarieties={variety}
+          selectedPackaging={pack}
+          onToggleCategory={(v) => toggleMulti('cat', v)}
+          onToggleVariety={(v) => toggleMulti('variety', v)}
+          onTogglePackaging={(v) => toggleMulti('pack', v)}
+          onClearAll={clearAll}
+          summaryCount={activeCount}
+        />
 
-          <div className="mt-4 space-y-4">
-            <FilterGroup
-              title="Category"
-              options={categories.map((c) => ({ value: c.slug, label: c.label }))}
-              selected={category}
-              onToggle={(v) => toggleMulti('cat', v)}
-            />
-            <FilterGroup
-              title="Variety"
-              options={toOptions(varieties)}
-              selected={variety}
-              onToggle={(v) => toggleMulti('variety', v)}
-            />
-            <FilterGroup
-              title="Packaging"
-              options={toOptions(packaging)}
-              selected={pack}
-              onToggle={(v) => toggleMulti('pack', v)}
-            />
-          </div>
-        </aside>
-
-        {/* Results */}
         <section>
-          {loading ? (
-            <div className={view === 'grid' ? 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3' : 'grid grid-cols-1 gap-4'}>
-              {[...Array(6)].map((_, idx) => (
-                <div key={idx} className="card h-48 animate-pulse bg-slate-100" />
-              ))}
-            </div>
-          ) : filtered.length === 0 ? (
+          {filtered.length === 0 ? (
             <div className="card p-8 text-center">
               <h3 className="text-lg font-semibold text-slate-900">No results</h3>
               <p className="mt-2 text-slate-600">Try removing filters or searching a different keyword.</p>
@@ -238,110 +235,45 @@ export default function ProductsPage() {
               </button>
             </div>
           ) : (
-            <div
-              className={
-                view === 'grid'
-                  ? 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-                  : 'grid grid-cols-1 gap-4'
-              }
-            >
-              {filtered.map((p: any) => (
-                <ProductCard
-                  key={p.slug}
-                  product={{
-                    name: p.name,
-                    shortDesc: p.shortDesc,
-                    categoryLabel: p.categoryLabel,
-                    categorySlug: p.categorySlug,
-                    slug: p.slug,
-                    heroImage: p.heroImage,
-                    highlights: p.highlights,
-                    tags: p.tags,
-                  }}
-                  view={view}
-                />
-              ))}
-            </div>
+            <ProductGrid
+              view={view}
+              products={filtered.map((p: any) => ({
+                name: p.name,
+                shortDesc: p.shortDesc,
+                categoryLabel: p.categoryLabel,
+                categorySlug: p.categorySlug,
+                slug: p.slug,
+                heroImage: p.heroImage,
+                highlights: p.highlights,
+                tags: p.tags,
+              }))}
+            />
           )}
         </section>
       </div>
 
-      {/* Mobile filter drawer */}
-      {mobileFiltersOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/40 md:hidden"
-          onClick={() => setMobileFiltersOpen(false)}
-          aria-label="Close filters overlay"
-        >
-          <div
-            className="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-semibold">Filters</h3>
-              <button className="btn btn-outline" onClick={() => setMobileFiltersOpen(false)}>
-                Close
-              </button>
-            </div>
-
-            <div className="mt-4 space-y-4">
-              <FilterGroup
-                title="Category"
-                options={categories.map((c) => ({ value: c.slug, label: c.label }))}
-                selected={category}
-                onToggle={(v) => toggleMulti('cat', v)}
-              />
-              <FilterGroup
-                title="Variety"
-                options={toOptions(varieties)}
-                selected={variety}
-                onToggle={(v) => toggleMulti('variety', v)}
-              />
-              <FilterGroup
-                title="Packaging"
-                options={toOptions(packaging)}
-                selected={pack}
-                onToggle={(v) => toggleMulti('pack', v)}
-              />
-            </div>
-
-            <button className="btn btn-primary mt-6 w-full" onClick={() => setMobileFiltersOpen(false)}>
-              Apply
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function FilterGroup({
-  title,
-  options,
-  selected,
-  onToggle,
-}: {
-  title: string
-  options: { value: string; label: string }[]
-  selected: string[]
-  onToggle: (value: string) => void
-}) {
-  return (
-    <div className="space-y-2">
-      <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{title}</p>
-      <div className="space-y-2">
-        {options.map((opt) => (
-          <label key={opt.value} className="flex items-center gap-2 text-sm text-slate-700">
-            <input
-              type="checkbox"
-              checked={selected.includes(opt.value)}
-              onChange={() => onToggle(opt.value)}
-              className="h-4 w-4 rounded border-slate-300 text-cyan-700"
-            />
-            {opt.label}
-          </label>
-        ))}
-      </div>
+      <FilterDrawer
+        open={mobileFiltersOpen}
+        onClose={() => setMobileFiltersOpen(false)}
+        categories={categories}
+        varieties={varieties}
+        packaging={packaging}
+        selectedCategories={category}
+        selectedVarieties={variety}
+        selectedPackaging={pack}
+        onApply={(next) => {
+          const p = new URLSearchParams(params)
+          p.delete('cat')
+          p.delete('variety')
+          p.delete('pack')
+          next.cat.forEach((v) => p.append('cat', v))
+          next.variety.forEach((v) => p.append('variety', v))
+          next.pack.forEach((v) => p.append('pack', v))
+          setParams(p, { replace: true })
+        }}
+        onClearAll={clearAll}
+        summaryCount={activeCount}
+      />
     </div>
   )
 }

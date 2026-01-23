@@ -4,19 +4,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Premium export theme tokens */
+/* Premium export theme tokens (orange + beige) */
 :root {
-  --bg: 248 250 252; /* slate-50 */
+  --bg: 250 247 240; /* soft beige */
   --surface: 255 255 255; /* white */
-  --text: 15 23 42; /* slate-900 */
-  --muted: 71 85 105; /* slate-600 */
-  --border: 226 232 240; /* slate-200 */
+  --text: 17 24 39; /* slate-900-ish */
+  --muted: 87 99 117; /* slate-600-ish */
+  --border: 231 226 215; /* warm border */
 
-  --brand: 12 74 110; /* deep ocean blue */
-  --brand-2: 180 83 9; /* warm gold */
-  --brand-soft: 240 249 255; /* sky-50 */
+  --brand: 199 90 0; /* deep orange */
+  --brand-2: 244 222 190; /* warm beige accent */
+  --brand-soft: 255 247 238; /* light peach */
 
-  --ring: 14 116 144; /* cyan-700-ish */
+  --ring: 199 90 0; /* ring matches brand */
   --danger: 220 38 38; /* red-600 */
 }
 
@@ -28,8 +28,8 @@ body {
 body {
   color: rgb(var(--text));
   background:
-    radial-gradient(1200px 600px at 85% -10%, rgba(180, 83, 9, 0.12), transparent 60%),
-    radial-gradient(900px 500px at 10% 0%, rgba(12, 74, 110, 0.1), transparent 55%),
+    radial-gradient(1200px 600px at 85% -10%, rgba(199, 90, 0, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 10% 0%, rgba(244, 222, 190, 0.3), transparent 55%),
     rgb(var(--bg));
   font-family: 'Inter', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-feature-settings: 'ss01' 1, 'cv11' 1;
@@ -41,7 +41,7 @@ a {
 
 @layer components {
   .container-xl {
-    @apply mx-auto w-full max-w-6xl px-4 md:px-6;
+    @apply mx-auto w-full max-w-7xl px-4 md:px-6;
   }
 
   .card {
@@ -55,23 +55,23 @@ a {
   }
   .btn-primary {
     background: rgb(var(--brand));
-    color: white;
+    color: #fff7ed;
     @apply hover:opacity-95 active:opacity-90;
   }
   .btn-outline {
-    @apply border border-slate-300 bg-white text-slate-900 hover:bg-slate-50;
+    @apply border border-[rgb(var(--brand))] bg-white text-[rgb(var(--brand))] hover:bg-[rgb(var(--brand-soft))];
   }
   .badge {
-    @apply inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700;
+    @apply inline-flex items-center rounded-full border border-[rgb(var(--border))] bg-white px-3 py-1 text-xs font-medium text-[rgb(var(--text))];
   }
   .input {
-    @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-cyan-700 focus:ring-4 focus:ring-cyan-100;
+    @apply w-full rounded-xl border border-[rgb(var(--border))] bg-white px-3 py-2 text-sm outline-none transition focus:border-[rgb(var(--brand))] focus:ring-4 focus:ring-[rgba(199,90,0,0.12)];
   }
   .label {
-    @apply text-sm font-medium text-slate-800;
+    @apply text-sm font-medium text-[rgb(var(--text))];
   }
   .help {
-    @apply text-xs text-slate-500;
+    @apply text-xs text-[rgb(var(--muted))];
   }
   .error {
     color: rgb(var(--danger));
