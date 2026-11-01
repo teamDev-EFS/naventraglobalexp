@@ -1,0 +1,11 @@
+# Netlify build settings. The build script runs the normal build, or answers every URL with a
+# 503 "temporarily unavailable" page while SITE_PAUSED is "true" (see scripts/netlify-build.mjs).
+
+[build]
+  command = "node scripts/netlify-build.mjs"
+  publish = "dist"
+
+[build.environment]
+  # Pause switch: "true" answers every URL with HTTP 503 and a "temporarily unavailable" page.
+  # This file overrides the Netlify UI. Set it to "false" and push to bring the site back.
+  SITE_PAUSED = "true"
